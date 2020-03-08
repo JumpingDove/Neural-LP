@@ -19,7 +19,7 @@ def evaluate():
     start = time.time()
 
     if not option.raw:
-        truths = pickle.load(open(option.truths, "r"))
+        truths = pickle.load(open(option.truths, "rb"))
         query_heads, query_tails = truths.values()
     
     hits = 0
@@ -46,7 +46,13 @@ def evaluate():
             else:
                 also_correct = query_tails[(q, t)]
             also_correct = set(also_correct)
-            assert(h in also_correct)
+            try:
+                assert(h in also_correct)
+            except:
+                print('l', l)
+                print('query_tails(%s, %s)' %(q, t),  query_tails[(q, t)])
+                print(h, also_correct)
+
             #this_preds_filtered = [j for j in this_preds[:-1] if not j in also_correct] + this_preds[-1:]
             this_preds_filtered = set(this_preds[:-1]) - also_correct
             this_preds_filtered.add(this_preds[-1])

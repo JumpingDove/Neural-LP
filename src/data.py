@@ -114,7 +114,7 @@ class Data(object):
             self.num_operator = 2 * self.num_relation
 
         # get rules for queries and their inverses appeared in train and test
-        self.query_for_rules = list(set(zip(*self.train)[0]) | set(zip(*self.test)[0]) | set(zip(*self._augment_with_reverse(self.train))[0]) | set(zip(*self._augment_with_reverse(self.test))[0]))
+        self.query_for_rules = list(set(next(zip(*self.train))) | set(next(zip(*self.test))) | set(next(zip(*self._augment_with_reverse(self.train)))) | set(next(zip(*self._augment_with_reverse(self.test)))))
         self.parser = self._create_parser()
 
     def _create_parser(self):
@@ -126,7 +126,7 @@ class Data(object):
         for key, value in self.relation_to_number.items():
             parser["query"][value] = key
             parser["query"][value + self.num_relation] = "inv_" + key
-        for query in xrange(self.num_relation):
+        for query in range(self.num_relation):
             d = {}
             if self.type_check:
                 for i, o in enumerate(self.domains[query]):
@@ -210,7 +210,7 @@ class Data(object):
 
     def _db_to_matrix_db(self, db):
         matrix_db = {r: ([[0,0]], [0.], [self.num_entity, self.num_entity]) 
-                     for r in xrange(self.num_relation)}
+                     for r in range(self.num_relation)}
         for i, fact in enumerate(db):
             rel = fact[0]
             head = fact[1]

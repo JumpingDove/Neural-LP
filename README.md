@@ -6,10 +6,12 @@ This is the implementation of Neural Logic Programming, proposed in the followin
 Fan Yang, Zhilin Yang, William W. Cohen.
 NIPS 2017.
 
-## Requirements
-- Python 2.7
+## Requirements (my environment)
+- GeForce GTX 1660 Ti
+- Windows 10 Pro. 64-bit
+- Python 3.5 (since Tensorflow 1.0.1 whl file supports only cp35-cp35m-win_amd64.)
 - Numpy 
-- Tensorflow 1.0.1
+- Tensorflow 1.0.1 cpu version (my GPU doen't support CUDA 8 which Tensorflow 1.0.1 supports. If your GPU support CUDA 8, the GPU version might be ok...)
 
 ## Quick start
 The following command starts training a dataset about family relations, and stores the experiment results in the folder `exps/demo/`.
@@ -25,7 +27,9 @@ To evaluate the prediction results, follow the steps below. The first two steps 
 
 We use the experiment from Quick Start as an example. Change the folder names (datasets/family, exps/dev) for other experiments.
 ```
-. eval/collect_all_facts.sh datasets/family
+python eval/collect_all_facts.py --path=datasets\\family
 python eval/get_truths.py datasets/family
 python eval/evaluate.py --preds=exps/demo/test_predictions.txt --truths=datasets/family/truths.pckl
 ```
+
+

@@ -73,7 +73,7 @@ def main():
     
     os.environ["CUDA_VISIBLE_DEVICES"] = option.gpu
     tf.logging.set_verbosity(tf.logging.ERROR)
-       
+
     if not option.query_is_language:
         data = Data(option.datadir, option.seed, option.type_check, option.domain_size, option.no_extra_facts)
     else:
